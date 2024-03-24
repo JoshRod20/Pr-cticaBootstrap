@@ -11,9 +11,9 @@
     rel="stylesheet" 
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
     crossorigin="anonymous"
-    >
+    > <!-- Puedes usar las carpertas también, es más fácil, asi no copias los link y no te equivocas, te daré un ejemplo-->
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./src/src/bootstrap-icons.css"> <!-- Así como este, fácil no?-->
 
 </head>
 
@@ -38,6 +38,7 @@
             </a>
         </li>
     </ul>
+</header> <!--La etiqueta header la tenía en otro lado, hasta aquí termina, recuerda que header en el menú de la parte superior de la página-->
 
     <div class="px4 tex-center">
         <div class="container">
@@ -52,45 +53,50 @@
         action="https://formsubmit.co/rodriguezjosh2003@gmail.com" 
         method="POST"
         novalidate>
-    </form>
+        <!-- Aquí hace falta el resto de formulario, por eso no te dá nada, todo lo tienes afuera de la etiqueta form-->
 
-    <div class="row g-3">
-    </div>
+        <!--Esto vá aquí, no donde lo tenías anteriormente-->
+        <div class="row g-3">
+            <!--Aquí sigue el otro contenedor de todos los inputs en el formulario-->
 
+            <!--Esto era-->
+            <div class="col-lg-5">
+                <label for="nombreAgente" class="form-label">Nombre del agente</label>
+                <input name="Nombre-Agente"  type="text" class="form-control" id="nombreAgente"
+                placeholder="Ingrese su nombre" required />
+                <div class="valid-feedback">
+                    ¡Correcto! 🐱
+                </div>
+                <div class="invalid-feedback">
+                    Debe ingresar su nombre.
+                </div>
+            </div> <!--Aquí termina el contenedor, es solo para el input nada más, lo tenías después del botón y no es ahí-->
         </div>
-    </div>
-        </header>
 
-        <div class="col-lg-5">
-            <label for="nombreAgente" class="form-label">Nombre del agente</label>
-            <input name="Nombre-Agente"  type="text" class="form-control" id="nombreAgente"
-            placeholder="Ingrese su nombre" required />
-            <div class="valid-feedback">
-                ¡Correcto! 🐱
-            </div>
-            <div class="invalid-feedback">
-                Debe ingresar su nombre.
-            </div>
+        <!--Etiqueta para separar los espacios dentro del formulario-->
+        <hr class="my-4">
 
-    <hr class="my-4">
-
+        <!--Botón del formulario-->
+        <!--El botón también vá dentro de la etiqueta form, es un componente más del formulario-->
         <button 
-            type="submit"
-            class="btn btn-primary btn-lg"
-            onclick="realizarCita()">
-            GENERAR CITA
-        </button>
+        type="submit"
+        class="btn btn-primary btn-lg"
+        onclick="realizarCita()">
+        GENERAR CITA
+    </button>
+    </form>
         </div>
-
+    </div>
     </div>
 
+    <!--Lo cambié para no revisar si el link tenía algo malo y hacerlo más fácil-->
     <script 
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" 
-        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" 
-        crossorigin="anonymous">
+        src="./src/src/bootstrap.bundle.min.js"> 
     </script>
 
-    <script src="https://cdnjs.cloudflare.com/adjax/libs/jspdf/1.3.4/jspdf.min,js">
+        <!--Tenías una coma en lugar de un punto en el link, por lo tanto lo tienes malo, lo cambié igual-->
+        <!--Busco lo fácil, aprende-->
+    <script src="./src/src/jspdf.min.js">
 
     </script>
 
@@ -113,58 +119,26 @@
     </script>
 
     <script>
-        //Crea una instancia del objeto "jsPDF" Y
-        //lo asigna a la variable constante "doc"
-        const doc= new jsPDF();
+//Borré los comentario porque son innecesarios y ELiab lo dijo
+//Todo esto vá dentro de una función para llamarla desde el botón del formulario, Eliab lo explicó igual
+//Por eso no te funciona nada
+//Tienes solo un campo en tu formulario, no pueden ir dos
+//La fecha no vá porque no la tienes como campo
+//Tienes que colocar el nombre del id del input para guardar los datos
 
-        //El método "steFillColor" del objeto "doc" para 
-        //establecer el color de relleno del siguiente elemento
-        doc.setFillColor(28, 41, 51);
+        function realizarCita() {
 
-        //El método "rect" del objeto "doc" para dibujar
-        //un rectángulo en la página PDF
-        doc.rect(0, 0, 220, 60, 'f');
-        
-        //Agrega una imágen al documento PDF. Los parámetros son
-        //la imágen (imagenData), la posición en la que se debe
-        //colocar la imágen del documento (10, 8), y las
-        //dimensiones de la imágen (106, 34)
-        doc.addImage(ImageData, 10, 8, 106, 34);
-
-        //Establece el tamaño de la fuente para el
-        //texto que se va a agregar.
-        doc.setFontSize(14);
-
-        doc.setFontType("bold");
-        //Establece el tipo de fuente en negrita
-
-        doc.setTextColor(255, 255, 255);
-        //Establece el color del texto en blanco.
-
-        doc.tex(`WWSOLAR CALL CENTER NICA 2023E`, 12, 50);
-        //Agrega el texto "WWSOLAR CALL CENTER NICA 2023" en
-        //la posición (12, 50) en el documento PDF.
-
-        let partes = fecha.split('-');
-        //Separa la fecha  en partes usando el separador '-'.
-        //Esto se utiliza para obtener el dia, mes y año de la fecha.
-
-        var fechadoc = partes[2] + '-' + partes[1] + '-' + partes[0];
-        //Toma las partes de la fecha y las concatena en un formato
-        //de fecha que se utiliza como parte del nombre del archivo PDF.
-        //En este caso, la fecha se concatena en el orden dia_mes_año y
-        //se separa con guiones bajos para formar una cadena de texto.
-
-        const docpdf = `${nombreCliente} ${apellidoCliente} ${fechadoc}.pdf`;
-        //Crea el nombre del archivo PDF utilizando el nombre del cliente,
-        //el apellido y la fecha concatenados en una cadena de texto.
-        //El nombre del archivo PDF se guarda en la constante docpdf.
-
-        doc.save(docpdf);
-        //Guarda el documento PDF con el nombre del archivo que se ha generado.
-        //El método save() es proporcionado por la biblioteca JSPF y permite
-        //guardar el documento en el sistema de archivos local o
-        //descargalo directamente een ek navegador.
+            const doc = new jsPDF();
+            doc.setFillColor(28, 41, 51);
+            doc.rect(0, 0, 220, 60, 'f');
+            doc.addImage(imageData, 10, 8, 106, 34);
+            doc.setFontSize(14);
+            doc.setFontType("bold");
+            doc.setTextColor(255, 255, 255);
+            doc.text('WWSOLAR CALL CENTER NICA 2023', 12, 50);
+            const docpdf = `${nombreAgente}.pdf`;
+            doc.save(docpdf); 
+        }
     </script>
 </body>
 </html>
